@@ -79,7 +79,7 @@
                                     <tr class="default">
                                         <th>list</th>
                                         <td>
-                                            ArrayList<Client> list = new ArrayList<>();
+                                            ArrayList&lt;Client&gt; list = new ArrayList<>();
                                     </td>
                                     </tr>
                                     <tr>
@@ -150,7 +150,7 @@ public String fillList() {
                         <div class="card-body">
                             <textarea class="txtarea" name="txtArea01">
 @WebMethod(operationName = "findAll")
-public ArrayList<Client> findAll() {
+public ArrayList&lt;Client&gt; findAll() {
     fillList();
     return list;
 }
