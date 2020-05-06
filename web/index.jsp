@@ -238,6 +238,104 @@ public String delete(@WebParam(name = "id") int id){
                 </div>
             </div>
 
+            <hr>
+            
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 01: Obtener Clientes
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testFindAll.png" alt="FindAll" width="100%">
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 02: Obtener un Cliente por su ID
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testFindById.png" alt="FindById" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 03: Crear un Cliente
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testCreate.png" alt="Create" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 04: Cliente creado con el ID 4
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testCreateId4.png" alt="Create" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 05: Actualizar el Cliente con ID 2
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testUpdate.png" alt="Update" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 06: Cliente con ID 2 actualizado
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testUpdateId2.png" alt="UpdateId2" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 07: Eliminar un Cliente
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testDelete.png" alt="Delete" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Prueba 08: Cliente con ID 2 eliminado
+                        </div>
+                        <div class="card-body">
+                            <img src="img/testDeleteId2.png" alt="DeleteId2" width="100%">
+                        </div>
+                    </div>
+                </div>               
+            </div>
             
         </div>
         <script src="js/codemirror.js" type="text/javascript"></script>
