@@ -17,8 +17,13 @@
         <link href="css/ayu-mirage.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <style>
+            img{
+                width: 100%;
+            }
+        </style>
         <nav class="navbar navbar-dark bg-primary">
-            <span class="navbar-brand">SOAP - CRUD CLIENTE - NO DATABASE</span>
+            <span class="navbar-brand">SOAP - CRUD CLIENTE - DATABASE</span>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="https://github.com/aimarandony/my-first-soap" target="_blank"><i class="fab fa-github pr-1"></i> GITHUB</a>
@@ -28,7 +33,23 @@
                 </li>
             </ul>
         </nav>
+
         <div class="container my-5">
+
+            <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p style="margin: 0">
+                    Proyecto SOAP - Creación de un Servicio SOAP, con base de datos MySQL. Recordar siempre agregar la librería de MySQL JDBC Driver
+                </p>
+            </div>
+            
+            <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p style="margin: 0">
+                    IDE usado: Netbeans IDE 8.2
+                </p>
+            </div>
+                        
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover">
@@ -63,283 +84,419 @@
                 </div>
             </div>
 
-            <hr>
-            
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th colspan="2">Variables Usadas</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="default">
-                                        <th>list</th>
-                                        <td>
-                                            ArrayList&lt;Client&gt; list = new ArrayList<>();
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                        <th>countId</th>
-                                        <td>
-                                            int countId = 0;
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                            </table> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Método 01: Para obtener el index de mi ArrayList por el id.
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "method01")
-public int findIndexOfId(int id){
-    for (int i = 0; i < list.size(); i++) {
-        if(id == list.get(i).getId()){
-            return i;
-        }
-    }
-    return -1;
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Método 02: Para llenar mi ArrayList con 3 Clientes
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "method02")
-public String fillList() {
-    if (list.isEmpty()) {
-        list.add(new Client(1, "Lucas", "Kingston", "78495612"));
-        list.add(new Client(2, "Marcos", "Tulio", "76451245"));
-        list.add(new Client(3, "Joel", "Llano", "78579484"));
-        countId = 3;
-    }
-    return "Metodo para llenar la lista de Clientes.";
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <hr>
-            
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Obtener todos los Clientes
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "findAll")
-public ArrayList&lt;Client&gt; findAll() {
-    fillList();
-    return list;
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Obtener un Cliente por su id
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "findById")
-public Client findById(@WebParam(name = "id") int id) {
-    fillList();
-    Client client = list.get(findIndexOfId(id));
-    return client;
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Crear un nuevo Cliente
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "create")
-public Client create(@WebParam(name = "client") Client client) {
-    fillList();
-    client.setId(countId + 1);
-    list.add(client);
-    ++ countId;
-    return client;
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Actualizar un Cliente por su id
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "update")
-public Client update(@WebParam(name = "client") Client client){
-    fillList();
-    list.set(findIndexOfId(client.getId()), client);
-    Client updatedClient = list.get(findIndexOfId(client.getId()));
-    return updatedClient;
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Eliminar un Cliente por su id
-                        </div>
-                        <div class="card-body">
-                            <textarea class="txtarea" name="txtArea01">
-@WebMethod(operationName = "delete")
-public String delete(@WebParam(name = "id") int id){
-    fillList();
-    Client client = list.get(findIndexOfId(id));
-    list.remove(findIndexOfId(id));
-    return "El Cliente " + client.getName() + " se ha eliminado correctamente.";
-}
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            
-            <div class="row">
+                        <div class="row">
                 <div class="col-12 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            ◘ Prueba 01: Obtener Clientes
+                            ◘ Base de Datos - MySQL
                         </div>
                         <div class="card-body">
-                            <img src="img/testFindAll.png" alt="FindAll" width="100%">
+                            <textarea class="txtarea" name="txtArea01">
+create database BDSoapPractice;
+use BDSoapPractice;
+
+create table CLIENTS (
+  id int not null auto_increment,
+  name varchar(100), 
+  lastname varchar(100),
+  dni char(8),
+  primary key (id)
+);
+
+insert into clients values 
+(null,'Lucas','Kingston','78495612'),
+(null,'Marcos','Tulio','76451245'),
+(null,'Joel','Llano','78579484');
+
+select * from clients;
+                            </textarea>
                         </div>
                     </div>
                 </div>                
             </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 02: Obtener un Cliente por su ID
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testFindById.png" alt="FindById" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 03: Crear un Cliente
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testCreate.png" alt="Create" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 04: Cliente creado con el ID 4
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testCreateId4.png" alt="Create" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 05: Actualizar el Cliente con ID 2
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testUpdate.png" alt="Update" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 06: Cliente con ID 2 actualizado
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testUpdateId2.png" alt="UpdateId2" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 07: Eliminar un Cliente
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testDelete.png" alt="Delete" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ◘ Prueba 08: Cliente con ID 2 eliminado
-                        </div>
-                        <div class="card-body">
-                            <img src="img/testDeleteId2.png" alt="DeleteId2" width="100%">
-                        </div>
-                    </div>
-                </div>               
-            </div>
+
+            <hr/>
             
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Paquete: com.soap.config || Clase: Conexión.java
+                        </div>
+                        <div class="card-body">
+                            <textarea class="txtarea" name="txtArea01">
+package com.soap.config;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion {
+    Connection conectar = null;
+    public Connection conectar(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDSoapPractice","root","");
+        }catch (ClassNotFoundException | SQLException e){
+            System.out.println("Error al conectar: "+e.getMessage());
+        }
+        return conectar;
+    }
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Paquete: com.soap.controllers || Clase: ClientController.java
+                        </div>
+                        <div class="card-body">
+                            <textarea class="txtarea" name="txtArea01">
+package com.soap.controllers;
+
+import com.soap.config.Conexion;
+import com.soap.models.Client;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ClientController extends Conexion{
+          
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
+     public List&lt;Client&gt; Listar() throws SQLException{
+        try {
+            String sql = "SELECT * FROM CLIENTS";
+            List&lt;Client&gt; lista = new ArrayList&lt;&gt;();
+            
+            con = conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Client client = new Client(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4));
+                
+                lista.add(client);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally{
+            rs.close();
+            ps.close();
+            con.close();
+        }
+    }
+
+    public Client ListarID(int id_client) throws SQLException{
+        try {
+            String sql = "SELECT * FROM CLIENTS WHERE id = "+id_client+"";
+            
+            Client client = null;
+            
+            con = conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {                
+                client = new Client(
+                        rs.getInt(1),
+                        rs.getString(2) ,
+                        rs.getString(3),
+                        rs.getString(4));
+                
+            }
+            
+            return client;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally{
+            rs.close();
+            ps.close();
+            con.close();
+        }
+    }
+
+    public boolean Insertar(Client client) throws SQLException {
+        try {
+            String sql = "INSERT INTO CLIENTS VALUES(null, ?, ?, ?)";
+            
+            boolean respuesta = false;
+            
+            con = conectar();
+            
+            ps = con.prepareStatement(sql);
+            ps.setString(1, client.getName());
+            ps.setString(2, client.getLastname());
+            ps.setString(3, client.getDni());
+
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+
+    public boolean Actualizar(Client client) throws SQLException {
+        try {
+            String sql = "UPDATE CLIENTS SET name = ?, lastname = ?, dni = ? WHERE id = ?";
+            
+            boolean respuesta = false;
+            
+            con = conectar();
+            
+            ps = con.prepareStatement(sql);
+            ps.setString(1, client.getName());
+            ps.setString(2, client.getLastname());
+            ps.setString(3, client.getDni());
+            ps.setInt(4, client.getId());
+            
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+
+    public boolean Eliminar(int id_client) throws SQLException {
+        try {
+            String sql = "DELETE FROM CLIENTS WHERE id = "+id_client+"";
+            
+            boolean respuesta = false;
+            
+            con = conectar();            
+            ps = con.prepareStatement(sql);
+            
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+    
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Paquete: com.soap.models || Clase: Client.java
+                        </div>
+                        <div class="card-body">
+                            <textarea class="txtarea" name="txtArea01">
+package com.soap.models;
+
+public class Client {
+
+    private int id;
+    private String name;
+    private String lastname;
+    private String dni;
+
+    public Client() {
+    }
+
+    public Client(int id, String name, String lastname, String dni) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.dni = dni;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }    
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            ◘ Paquete: com.soap.services || Clase: ClientService.java
+                        </div>
+                        <div class="card-body">
+                            <textarea class="txtarea" name="txtArea01">
+package com.soap.services;
+
+import com.soap.controllers.ClientController;
+import com.soap.models.Client;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+@WebService(serviceName = "ClientService")
+public class ClientService {
+    
+    ClientController clientController = new ClientController();
+
+    //Obtener todos los Clientes
+    @WebMethod(operationName = "findAll")
+    public List&lt;Client&gt; findAll() {
+        try {
+            return clientController.Listar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    //Obtener un Cliente por su id
+    @WebMethod(operationName = "findById")
+    public Client findById(@WebParam(name = "id") int id) {
+        try {
+            return clientController.ListarID(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    //Crear un nuevo Cliente
+    @WebMethod(operationName = "create")
+    public String create(@WebParam(name = "client") Client client) {
+        try {
+            if (clientController.Insertar(client)) {
+                return "Cliente " + client.getName() + " ha sido creado correctamente.";
+            }
+            return "Error al crear el cliente";
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error al realizar la petición";
+        }
+    }
+    
+    //Actualizar un Cliente por su id
+    @WebMethod(operationName = "update")
+    public Client update(@WebParam(name = "client") Client client) {
+        try {
+            Client clientUpdated = null;
+            if (clientController.Actualizar(client)) {
+                clientUpdated = clientController.ListarID(client.getId());
+            }
+            return clientUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    //Eliminar un Cliente por su id
+    @WebMethod(operationName = "delete")
+    public String delete(@WebParam(name = "id") int id) {
+        try {
+            String msg = "El cliente no se ha podido eliminar";
+            if (clientController.Eliminar(id)) {
+                msg = "El cliente se ha eliminado correctamente";
+            }
+            return msg;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error al realizar la petición";
+        }
+    }
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
         </div>
         <script src="js/codemirror.js" type="text/javascript"></script>
         <script src="js/mode-clike.js" type="text/javascript"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
         <script>
 
             var txtarea = document.getElementsByClassName("txtarea");
