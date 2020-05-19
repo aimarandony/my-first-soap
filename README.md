@@ -2,8 +2,9 @@
 > En este proyecto encontrarás un ejemplo de la creación de un servicio SOAP, y como conectarlo con una base de datos MySQL.
 
 #### Consideraciones
-> Recordar siempre agregar la librería de MySQL JDBC Driver 
-> IDE usado: Netbeans IDE 8.2 
+- Recordar siempre agregar la librería de MySQL JDBC Driver 
+- IDE usado: Netbeans IDE 8.2 
+
 ### ◘ Base de Datos - MySQL 
 ```
 create database BDSoapPractice;
